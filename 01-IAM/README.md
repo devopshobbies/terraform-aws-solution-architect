@@ -1,4 +1,4 @@
-### what should you do
+##  what should you do to control our users and groups?
 you can go and create users, role and groups and also attach policies to them but we recommend to handle users and groups with this two technologies
  - Control Tower 
  - AWS Organization
