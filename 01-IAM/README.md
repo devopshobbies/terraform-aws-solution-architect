@@ -3,6 +3,10 @@ you can go and create users, role and groups and also attach policies to them bu
  - Control Tower 
  - AWS Organization
 
+you can find this sample code too!
+```sh
+# check the sample code folder
+```
 
 we create Roles, Policies and attach them together in some cases, exactly in the terraform code.
 for example:
