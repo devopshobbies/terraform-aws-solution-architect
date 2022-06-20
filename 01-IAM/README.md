@@ -10,6 +10,18 @@ you can find this sample code too!
 
 we create Roles, Policies and attach them together in some cases, exactly in the terraform code.
 for example:
+
+> Note: if you want to attach Role to an Ec2 instance you need to go for iam_instance_profile on aws_instance resource. So for that you need to create a new resource first and then use it.aws_iam_instance_profile
+```sh
+resource "aws_iam_instance_profile" "s3-bucket-role-instance-profile"{
+  name = "s3-bucket-role-instance-profile"
+  role = aws_iam_role.{Resource}.{Name}
+
+}
+
+```
+
+
 ```sh
 ################################
 # Eks cluster iam role
