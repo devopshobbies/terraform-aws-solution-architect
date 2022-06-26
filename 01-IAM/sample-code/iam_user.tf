@@ -14,27 +14,34 @@ resource "aws_iam_user" "dvh02" {
   }
 }
 
-resource "aws_iam_group" "first-group" {
-  name = "first-group"
+resource "aws_iam_user" "dvh03" {
+  name = "dvh03"
+  tags = {
+    created_by = "terraform"
+    owner      = "morteza.rahimi"
+  }
+}
+resource "aws_iam_group" "admin-group" {
+  name = "administrators"
 }
 
 # Assign users to group
 resource "aws_iam_group_membership" "team" {
-  name = "tf-testing-group-membership"
+  name = "devopshobbies-group-membership"
 
   users = [
+    aws_iam_user.dvh03.name,
     aws_iam_user.dvh02.name,
     aws_iam_user.dvh01.name,
   ]
 
-  group = aws_iam_group.first-group.name
+  group = aws_iam_group.admin-group.name
 }
 
-# attach policy to the group 
-
-# EC2 Full access ARN is just a sample, you can use each policy you want or even you can creat your own policy 
-#arn:aws:iam::aws:policy/AmazonEC2FullAccess
-resource "aws_iam_group_policy_attachment" "test-attach" {
-  group      = aws_iam_group.first-group.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+# Attach policy to the group 
+# We are going to make these three users full Administrators
+resource "aws_iam_group_policy_attachment" "attach" {
+  group      = aws_iam_group.admin-group.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
+
