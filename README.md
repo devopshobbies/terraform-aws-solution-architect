@@ -26,3 +26,7 @@ If you want to learn aws solution architect, you need to start it as a code and 
 - [14-Glue]() In Progress
 - [15-MSK]() In Progress
 - [16-Neptune]() In Progress
+- [17-LB]() In Progress
+- [18-ASG]() In Progress
+- [19-SG]() In Progress
+- [20-KMS]() In Progress
