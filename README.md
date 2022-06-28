@@ -9,6 +9,8 @@ If you want to learn aws solution architect, you need to start it as a code and 
 
 - [01-IAM](https://github.com/devopshobbies/terraform-aws-solution-architect/tree/main/01-IAM)
   - [IAM-policy]() In Progress
+  - [IAM-role]() In Progress
+  - [IAM-user]() In Progress
 - [02-EC2]() In Progress
 - [03-RDS]() In Progress
 - [04-S3bucket]() In Progress
