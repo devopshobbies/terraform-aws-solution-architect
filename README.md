@@ -7,8 +7,15 @@
 
 If you want to learn aws solution architect, you need to start it as a code and kill all the topics,So let's stop talking and start rolling the ball.
 
-- [01-iam](https://github.com/devopshobbies/terraform-aws-solution-architect/tree/main/01-IAM)
-  - [iam-policy]
-- [02-ec2] In Progress
-- [01-IAM]
-- [01-IAM]
+- [01-IAM](https://github.com/devopshobbies/terraform-aws-solution-architect/tree/main/01-IAM)
+  - [IAM-policy]
+- [02-EC@] In Progress
+- [03-RDS] In Progress
+- [04-S3bucket] In Progress
+- [04-S3bucket] In Progress
+- [04-S3bucket] In Progress
+- [04-S3bucket] In Progress
+- [04-S3bucket] In Progress
+- [04-S3bucket] In Progress
+- [04-S3bucket] In Progress
+- [04-S3bucket] In Progress
