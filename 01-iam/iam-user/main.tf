@@ -6,7 +6,7 @@ provider "aws" {
 # IAM user, login profile and access key
 #########################################
 module "iam_user" {
-  source = "../../modules/01-IAM/iam-user"
+  source = "../../modules/01-iam/iam-user"
 
   name          = "vasya.pupkin"
   force_destroy = true
@@ -26,7 +26,7 @@ module "iam_user" {
 # IAM user without pgp_key (IAM access secret will be unencrypted)
 ###################################################################
 module "iam_user2" {
-  source = "../../modules/iam-user"
+  source = "../../modules/01-iam/iam-user"
 
   name = "vasya.pupkin4"
 
