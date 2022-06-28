@@ -19,3 +19,7 @@ If you want to learn aws solution architect, you need to start it as a code and 
 - [09-EKS]() In Progress
 - [10-ECR]() In Progress
 - [11-CloudWatch]() In Progress
+- [12-VPC]() In Progress
+- [13-Redshift]() In Progress
+- [14-Glue]() In Progress
+- [15-MSK]() In Progress
