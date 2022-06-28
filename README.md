@@ -30,3 +30,7 @@ If you want to learn aws solution architect, you need to start it as a code and 
 - [18-ASG]() In Progress
 - [19-SG]() In Progress
 - [20-KMS]() In Progress
+- [21-cloudtrail]() In Progress
+- [22-waf]() In Progress
+- [23-SQS]() In Progress
+- [24-ACM]() In Progress
