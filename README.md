@@ -34,3 +34,4 @@ If you want to learn aws solution architect, you need to start it as a code and 
 - [22-waf]() In Progress
 - [23-SQS]() In Progress
 - [24-ACM]() In Progress
+- [25-EFS]() In Progress
