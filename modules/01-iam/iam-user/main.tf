@@ -1,23 +1,40 @@
 # Definition of IAM Users and Groups 
-resource "aws_iam_user" "dvh01" {
-  name = "dvh01"
-  tags = {
-    created_by = "terraform"
-    owner      = "babak.doraniarab"
-  }
-}
-resource "aws_iam_user" "dvh02" {
-  name = "dvh02"
-  tags = {
-    created_by = "terraform"
-    owner      = "ahmadali.bagheri"
-  }
+resource "aws_iam_user" "dvhb" {
+  count = var.create_user ? 1 : 0
+
+  name = var.username
+  path = var.path
+  tags = var.tags
 }
 
-resource "aws_iam_user" "dvh03" {
-  name = "dvh03"
-  tags = {
-    created_by = "terraform"
-    owner      = "morteza.rahimi"
-  }
+resource "aws_iam_user_login_profile" "dvhb" {
+  count = var.create_user && var.create_iam_user_login_profile ? 1 : 0
+
+  user                    = aws_iam_user.dvhb[0].name
+  pgp_key                 = var.pgp_key
+  password_length         = var.password_length
+  password_reset_required = var.password_reset_required
+}
+
+resource "aws_iam_access_key" "dvhb" {
+  count = var.create_user && var.create_iam_access_key ? 1 : 0
+
+  user    = aws_iam_user.dvhb[0].name
+  pgp_key = var.pgp_key
+}
+
+resource "aws_iam_group" "dvhb" {
+
+  name = var.group
+}
+
+resource "aws_iam_group_membership" "dvhb" {
+
+  name = "dvhb-group"
+
+  users = [
+    aws_iam_user.dvhb[0].name
+  ]
+  
+  group = aws_iam_group.dvhb.name
 }
