@@ -19,7 +19,7 @@ variable "create_iam_access_key" {
 variable "password_reset_required" {
   description = "Whether the user should be forced to reset the generated password on first login."
   type        = bool
-  default     = true
+  default     = false
 }
 ######
 
