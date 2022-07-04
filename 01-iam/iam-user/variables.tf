@@ -12,4 +12,3 @@ variable "password_reset_required" {
   type    = bool
   default = true
 }
-
