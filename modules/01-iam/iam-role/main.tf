@@ -46,7 +46,4 @@ resource "aws_key_pair" "deployer" {
   key_name   = "aws_key"
   public_key =  var.public_key
 }
-resource "aws_key_pair" "deployer" {
-  key_name   = "aws_key"
-  public_key =  var.public_key
-}
+
