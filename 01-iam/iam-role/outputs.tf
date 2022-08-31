@@ -41,5 +41,4 @@ output "aws_security_group_ingress" {
 output "aws_key_pair" {
   description = "aws_key_pair public_key"
   value       = module.iam_role.aws_key_pair
-
 }
