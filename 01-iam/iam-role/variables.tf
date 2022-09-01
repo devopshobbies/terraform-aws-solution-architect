@@ -3,8 +3,8 @@ variable "region" {
   type        = string
   default     = "us-east-1"
 }
-variable "Flavor" {
-  description = "Flavor"
+variable "instance_type" {
+  description = "instance_type"
   type        = string
   default     = "t2.micro"
 }
