@@ -1,12 +1,12 @@
 resource "aws_instance" "web" {
   for_each = var.ec2_deployments
-  ami = each.value.ami #ami           = var.ami
-  instance_type = "tets" #each.value.instance_type #instance_type =  var.instance_type
+  ami = each.value.ami 
+  instance_type = each.value.instance_type
   vpc_security_group_ids = [aws_security_group.main.id]
   key_name= "aws_key"
   user_data = "${file("user-data-httpd.sh")}"
   tags = {
-    Name = var.instance_name
+    Name = each.key
   }
     depends_on = [
       aws_security_group.main

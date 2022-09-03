@@ -11,5 +11,4 @@ variable "instance_type" {
 variable "public_key" {
   description = "Public Key"
   type        = string
-  default     = "key"
 }

@@ -26,5 +26,4 @@ variable "instance_name" {
 variable "public_key" {
   description = "Public Key"
   type = string
-  default = "key"
 }
