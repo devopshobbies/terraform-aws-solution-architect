@@ -32,15 +32,15 @@ output "aws_iam_instance_profile_role" {
 }
 output "aws_security_group_id" {
   description = "aws_security_group id"
-  value = aws_security_group.main.id 
+  value = aws_security_group.main_role.id 
 }
 output "aws_security_group_name" {
   description = "aws_security_group name"
-  value = aws_security_group.main.name 
+  value = aws_security_group.main_role.name 
 }
 output "aws_security_group_ingress" {
   description = "aws_security_group ingress"
-  value = aws_security_group.main.ingress 
+  value = aws_security_group.main_role.ingress 
 }
 output "aws_key_pair" {
   description = "aws_key_pair public_key"

@@ -9,7 +9,7 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 variable "public_key" {
-  description = "Public Key"
+  description = "Public Key" 
   type        = string
   # default     = ""
 }
