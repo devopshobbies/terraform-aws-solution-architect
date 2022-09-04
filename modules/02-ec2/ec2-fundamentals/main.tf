@@ -1,6 +1,17 @@
+data "aws_ami" "amazon-linux-2" {
+  most_recent = true
+  filter {
+    name   = "owner-alias"
+    values = ["amazon"]
+  }
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-ebs"]
+  }
+}
 resource "aws_instance" "web" {
   for_each = var.ec2_deployments
-  ami = each.value.ami 
+  ami = data.aws_ami.amazon-linux-2.id 
   instance_type = each.value.instance_type
   vpc_security_group_ids = [aws_security_group.main.id]
   key_name= "aws_key"
