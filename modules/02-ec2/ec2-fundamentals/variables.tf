@@ -4,17 +4,14 @@ variable "ec2_deployments" {
     "web" = {
       "region" = "us-east-1"
       "instance_type" = "t2.micro"
-      "ami" = "ami-05fa00d4c63e32376"
     },
     "app" = {
       "region" = "us-east-1"
       "instance_type" = "t2.micro"
-      "ami" = "ami-05fa00d4c63e32376"
     },
     "backend" = {
       "region" = "us-east-1"
       "instance_type" = "t2.micro"
-      "ami" = "ami-05fa00d4c63e32376"     
     }
   }
 }
