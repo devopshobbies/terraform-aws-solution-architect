@@ -10,57 +10,57 @@ data "aws_ami" "amazon-linux-2" {
   }
 }
 resource "aws_instance" "web" {
-  for_each = var.ec2_deployments
-  ami = data.aws_ami.amazon-linux-2.id 
-  instance_type = each.value.instance_type
+  for_each               = var.ec2_deployments
+  ami                    = data.aws_ami.amazon-linux-2.id
+  instance_type          = each.value.instance_type
   vpc_security_group_ids = [aws_security_group.main.id]
-  key_name= "aws_key"
-  user_data = "${file("user-data-httpd.sh")}"
+  key_name               = "aws_key"
+  user_data              = file("user-data-httpd.sh")
   tags = {
     Name = each.key
   }
-    depends_on = [
-      aws_security_group.main
-    ]
+  depends_on = [
+    aws_security_group.main
+  ]
 }
 // Secure the PgSQL RDS cluster using a dedicated SG
 resource "aws_security_group" "main" {
   name        = "Main Security Group"
   description = "Main Security Group"
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 443
-    to_port          = 443
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "TLS from VPC"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
-    ingress {
-    description      = "ICMP from VPC"
-    from_port        = -1
-    to_port          = -1
-    protocol         = "icmp"
-    cidr_blocks      = ["0.0.0.0/0"]
+  ingress {
+    description = "ICMP from VPC"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    description      = "HTTP from VPC"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "HTTP from VPC"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    description      = "SSH from VPC"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "SSH from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
     Name = "MAIN Security Group"
@@ -68,5 +68,7 @@ resource "aws_security_group" "main" {
 }
 resource "aws_key_pair" "deployer" {
   key_name   = "aws_key"
-  public_key =  var.public_key
+  public_key = var.public_key
 }
+
+
