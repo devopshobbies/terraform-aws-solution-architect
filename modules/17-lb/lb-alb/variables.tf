@@ -4,16 +4,16 @@
 # ---------------------------------------------------------------------------------------------------------------------
 
 variable "alb_name" {
-  description = "The name to use for this ALB"
+  description = "The Name To Use For This ALB"
   type        = string
 }
 
 variable "subnet_ids" {
-  description = "The subnet IDs to deploy to"
+  description = "The Subnet IDs To Deploy"
   type        = list(string)
 }
 
 variable "security_group_id" {
-  description = "The security group"
+  description = "The Security Group"
   type        = any
 }

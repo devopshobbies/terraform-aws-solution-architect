@@ -1,25 +1,25 @@
 output "ec2-instance-ipv4" {
   value       = aws_instance.ec2-instance.*.public_ip
-  description = "IPV4 of created ec2-instance"
+  description = "IPV4 of Created EC2-Instance"
 }
 
 output "ec2-instance-id" {
   value       = aws_instance.ec2-instance.*.id
-  description = "ID of created ec2-instance"
+  description = "ID of Created EC2-Instance"
 }
 
 output "ec2-instance-name" {
   value       = aws_instance.ec2-instance.*.tags
-  description = "Name of created ec2-instance"
+  description = "Name of Created EC2-Instance"
 }
 
 output "ec2-instance-dns" {
   value       = aws_instance.ec2-instance.*.public_dns
-  description = "Public dns of created ec2-instance"
+  description = "Public DNS of Created EC2-Instance"
 }
 
 output "ec2-elastic-address" {
-  description = "Elastic ip address"
+  description = "Elastic IP Address"
   value       = one(aws_eip.ec2-eip[*].address)
 }
 
