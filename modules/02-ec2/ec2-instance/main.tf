@@ -3,6 +3,7 @@ resource "aws_instance" "ec2-instance" {
   instance_type = var.instance_type
 
   count = var.number_of_instances
+  user_data = var.use_user_data ? data.template_file.user_data.rendered : null
 
   vpc_security_group_ids = [
     aws_security_group.ec2-sg.id
@@ -17,6 +18,10 @@ resource "aws_instance" "ec2-instance" {
     Name = var.instance_name
   }
 
+}
+
+data "template_file" "user_data" {
+  template = file("${path.module}/ec2-user-data.sh")
 }
 
 resource "aws_eip" "ec2-eip" {

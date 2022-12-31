@@ -12,3 +12,8 @@ variable "subnet_ids" {
   description = "The subnet IDs to deploy to"
   type        = list(string)
 }
+
+variable "security_group_id" {
+  description = "The security group"
+  type        = any
+}
