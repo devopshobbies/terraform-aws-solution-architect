@@ -2,6 +2,8 @@ resource "aws_instance" "ec2-instance" {
   ami           = var.ami
   instance_type = var.instance_type
 
+  count = var.number_of_instances
+
   vpc_security_group_ids = [
     aws_security_group.ec2-sg.id
   ]
@@ -24,7 +26,7 @@ resource "aws_eip" "ec2-eip" {
 resource "aws_eip_association" "ec2-eip-association" {
   count = var.use_elastic_ip ? 1 : 0
 
-  instance_id   = aws_instance.ec2-instance.id
+  instance_id   = aws_instance.ec2-instance[count.index].id
   allocation_id = aws_eip.ec2-eip.id
 }
 
@@ -54,7 +56,7 @@ resource "aws_security_group_rule" "allow_all_outbound" {
 
 
 locals {
-  http_port    = 22
+  http_port    = 80
   any_port     = 0
   any_protocol = "-1"
   tcp_protocol = "tcp"

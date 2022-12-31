@@ -28,3 +28,9 @@ variable "use_elastic_ip" {
   type        = bool
   default     = false
 }
+
+variable "number_of_instances" {
+  description = "Numbe of Instances"
+  type        = number
+  default = 1
+}

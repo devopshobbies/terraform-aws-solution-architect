@@ -1,15 +1,15 @@
 output "ec2-instance-ipv4" {
-  value       = aws_instance.ec2-instance.public_ip
+  value       = aws_instance.ec2-instance.*.public_ip
   description = "IPV4 of created ec2-instance"
 }
 
 output "ec2-instance-name" {
-  value       = aws_instance.ec2-instance.tags["Name"]
+  value       = aws_instance.ec2-instance.*.tags
   description = "Name of created ec2-instance"
 }
 
 output "ec2-instance-dns" {
-  value       = aws_instance.ec2-instance.public_dns
+  value       = aws_instance.ec2-instance.*.public_dns
   description = "Public dns of created ec2-instance"
 }
 
