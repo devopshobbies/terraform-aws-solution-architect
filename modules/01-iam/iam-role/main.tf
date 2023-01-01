@@ -19,18 +19,18 @@ resource "aws_instance" "web" {
   ami           = var.ami
   instance_type =  var.instance_type
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
-  vpc_security_group_ids = [aws_security_group.main.id]
-  key_name= "aws_key"
+  vpc_security_group_ids = [aws_security_group.main_role.id]
+  key_name= "aws_key_role"
   tags = {
     Name = var.instance_name
   }
 }
 // Secure the EC2 
-resource "aws_security_group" "main" {
-  name        = "Main Security Group"
-  description = "Main Security Group"
+resource "aws_security_group" "main_role" {
+  name        = "Main Role Security Group"
+  description = "Main Role Security Group"
   tags = {
-    Name = "MAIN Security Group"
+    Name = "MAIN Role  Security Group"
   }
 }
 // SSH can only be accessed from the WWW network (0.0.0.0/0)
@@ -40,9 +40,9 @@ resource "aws_security_group_rule" "ssh" {
   to_port           = 22
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.main.id
+  security_group_id = aws_security_group.main_role.id
 }
 resource "aws_key_pair" "deployer" {
-  key_name   = "aws_key"
+  key_name   = "aws_key_role"
   public_key =  var.public_key
 }

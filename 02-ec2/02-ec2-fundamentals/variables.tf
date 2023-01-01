@@ -4,12 +4,11 @@ variable "region" {
   default     = "us-east-1"
 }
 variable "instance_type" {
-  description = "instance_type"
+  description = "Instance type"
   type        = string
   default     = "t2.micro"
 }
 variable "public_key" {
-  description = "Public Key" 
+  description = "Public Key"
   type        = string
-  # default     = ""
 }
