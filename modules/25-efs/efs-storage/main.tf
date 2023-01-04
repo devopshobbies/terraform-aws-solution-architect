@@ -5,6 +5,8 @@ resource "aws_efs_file_system" "efs_fs" {
   encrypted = var.encryption
   throughput_mode = var.throughput_mode
 
+  performance_mode = var.performance_mode
+
   provisioned_throughput_in_mibps = var.throughput_mode == "provisioned" ? var.provisioned_throughput_in_mibps_val : null
 
   lifecycle_policy {
