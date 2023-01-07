@@ -14,20 +14,23 @@ variable "instance_class" {
   type        = string
 }
 
+# ---------------------------------------------------------------------------------------------------------------------
+# OPTIONAL PARAMETERS
+# These parameters have reasonable defaults.
+# ---------------------------------------------------------------------------------------------------------------------
+
 variable "username" {
   description = "Username For The Master DB User"
   type        = string
+  default = null
 }
 
 variable "password" {
   description = "Password For The Master DB User"
   type        = string
+  default = null
+  sensitive = true
 }
-
-# ---------------------------------------------------------------------------------------------------------------------
-# OPTIONAL PARAMETERS
-# These parameters have reasonable defaults.
-# ---------------------------------------------------------------------------------------------------------------------
 
 variable "allocated_storage" {
   description = "Allocated Storage For DB Instance In GB"
@@ -145,4 +148,10 @@ variable "family" {
   description = "The Family Of The DB Parameter Group"
   type        = string
   default     = "mysql8.0"
+}
+
+variable "replicate_source_db" {
+  description = "Specifies That This Resource Is A Replicate Database, And To Use This Value As The Source Database"
+  type        = string
+  default     = null
 }

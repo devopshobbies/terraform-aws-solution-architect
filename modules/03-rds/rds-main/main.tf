@@ -1,3 +1,10 @@
+locals {
+  username       = var.replicate_source_db != null ? null : var.username
+  password       = var.replicate_source_db != null ? null : var.password
+  engine         = var.replicate_source_db != null ? null : var.engine
+  engine_version = var.replicate_source_db != null ? null : var.engine_version
+}
+
 resource "aws_db_parameter_group" "db_param" {
   count = var.create_db_param ? 1 : 0
   name   = "rds-terraform-group"
@@ -25,11 +32,11 @@ resource "aws_db_instance" "db_instance" {
   allocated_storage      = var.allocated_storage
   max_allocated_storage  = var.max_allocated_storage
 
-  engine                 = var.engine
-  engine_version         = var.engine_version
+  engine                 = local.engine
+  engine_version         = local.engine_version
 
-  username               = var.username
-  password               = var.password
+  username               = local.username
+  password               = local.password
   
   publicly_accessible    = var.publicly_accessible
   skip_final_snapshot    = var.skip_final_snapshot
@@ -50,6 +57,8 @@ resource "aws_db_instance" "db_instance" {
   storage_encrypted = var.storage_encrypted
 
   apply_immediately = var.apply_immediately
+
+  replicate_source_db = var.replicate_source_db
 
   blue_green_update {
 

@@ -3,6 +3,11 @@ output "rds-vol-name" {
   description = "RDS Volume Name"
 }
 
+output "rds-vol-id" {
+  value       = module.rds-main.rds-vol-id
+  description = "RDS Volume ID"
+}
+
 output "rds-vol-address" {
   value       = module.rds-main.rds-vol-address
   description = "RDS Volume Address"
