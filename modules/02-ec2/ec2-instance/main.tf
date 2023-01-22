@@ -25,14 +25,15 @@ data "template_file" "user_data" {
 }
 
 resource "aws_eip" "ec2-eip" {
+  count = var.use_elastic_ip ? var.number_of_instances : 0
   vpc = true
 }
 
 resource "aws_eip_association" "ec2-eip-association" {
-  count = var.use_elastic_ip ? 1 : 0
+  count = var.use_elastic_ip ? var.number_of_instances : 0
 
   instance_id   = aws_instance.ec2-instance[count.index].id
-  allocation_id = aws_eip.ec2-eip.id
+  allocation_id = aws_eip.ec2-eip[count.index].id
 }
 
 resource "aws_security_group" "ec2-sg" {
