@@ -20,7 +20,7 @@ output "ec2-instance-dns" {
 
 output "ec2-elastic-address" {
   description = "Elastic IP Address"
-  value       = one(aws_eip.ec2-eip[*].address)
+  value       = [for eip_info in aws_eip.ec2-eip : eip_info.address]
 }
 
 output "ec2-security-group-id" {
