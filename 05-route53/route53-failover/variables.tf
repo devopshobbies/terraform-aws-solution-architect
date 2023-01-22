@@ -15,28 +15,4 @@ variable "force_destroy" {
   default     = true
 }
 
-variable "record_name" {
-  description = "The Name of The Record"
-  type        = string
-  default     = "terraform"
-}
-
-variable "record_type" {
-  description = "The Record Type. Valid Values Are 'A', 'Aaaa', 'Caa', 'Cname', 'Mx', 'Naptr', 'Ns', 'Ptr', 'Soa', 'Spf', 'Srv' And 'Txt'"
-  type        = string
-  default     = "A"
-}
-
-variable "records_list" {
-  description = "List of Records"
-  type        = list(string)
-  default     = ["11.12.13.14", "15.16.17.18"]
-}
-
-variable "ttl" {
-  description = "The TTL of The Record"
-  type        = number
-  default     = 600
-}
-
 
