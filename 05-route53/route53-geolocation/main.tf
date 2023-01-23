@@ -20,7 +20,7 @@ module "route53-main" {
 
   hosted_zone_name = var.hosted_zone_name
 
-  routing_policy_type = "weighted"
+  routing_policy_type = "geolocation"
 
   config_list = [
     {
@@ -28,7 +28,7 @@ module "route53-main" {
       record_type      = "A"
       hosted_zone_name = var.hosted_zone_name
 
-      identifier = "weighted-primary"
+      identifier = "geolocation-primary"
       ttl        = 300
 
       records_list = [module.ec2-instance.ec2-instance-ipv4[0]]
@@ -36,8 +36,8 @@ module "route53-main" {
       alias = {
         name = var.hosted_zone_name
       }
-      weighted_routing_policy = {
-        weight = 80
+      geolocation_routing_policy = {
+        continent = "EU"
       }
     },
     {
@@ -45,13 +45,13 @@ module "route53-main" {
       record_type      = "A"
       hosted_zone_name = var.hosted_zone_name
 
-      identifier = "weighted-secondary"
+      identifier = "geolocation-secondary"
       ttl        = 600
 
       records_list = [module.ec2-instance.ec2-instance-ipv4[1]]
 
-      weighted_routing_policy = {
-        weight = 20
+      geolocation_routing_policy = {
+        continent = "NA"
       }
     }
   ]

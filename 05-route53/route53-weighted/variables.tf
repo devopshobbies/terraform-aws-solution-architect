@@ -15,4 +15,8 @@ variable "force_destroy" {
   default     = true
 }
 
-
+variable "record_name" {
+  description = "The Name of The Record"
+  type        = string
+  default     = "weighted"
+}

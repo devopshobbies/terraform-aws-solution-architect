@@ -18,6 +18,6 @@ variable "force_destroy" {
 variable "record_name" {
   description = "The Name of The Record"
   type        = string
-  default     = "failover"
+  default     = "geolocation"
 }
 

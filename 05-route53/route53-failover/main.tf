@@ -24,7 +24,7 @@ module "route53-main" {
 
   config_list = [
     {
-      record_name      = "fail_1"
+      record_name      = var.record_name
       record_type      = "A"
       hosted_zone_name = var.hosted_zone_name
 
@@ -42,7 +42,7 @@ module "route53-main" {
       }
     },
     {
-      record_name      = "fail_2"
+      record_name      = var.record_name
       record_type      = "A"
       hosted_zone_name = var.hosted_zone_name
 

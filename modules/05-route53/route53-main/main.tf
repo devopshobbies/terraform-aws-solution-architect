@@ -31,4 +31,13 @@ resource "aws_route53_record" "route_record" {
       weight = each.value.weighted_routing_policy.weight
     }
   }
+
+  dynamic "geolocation_routing_policy" {
+    for_each = var.routing_policy_type == "geolocation" ? [true] : []
+
+    content {
+      continent   = lookup(each.value.geolocation_routing_policy, "continent", null)
+      country     = lookup(each.value.geolocation_routing_policy, "country", "*")
+    }
+  }
 }
