@@ -1,3 +1,9 @@
+# locals {
+#   records = concat(var.records_list, try(jsondecode(var.records_jsonencoded), []))
+
+#   recordsets = { for rs in local.records : try(rs.key, join(" ", compact(["${rs.name} ${rs.type}", try(rs.set_identifier, "")]))) => rs }
+# }
+
 resource "aws_route53_zone" "hosted_zone_public" {
   name = var.hosted_zone_name
 
@@ -5,55 +11,22 @@ resource "aws_route53_zone" "hosted_zone_public" {
 }
 
 resource "aws_route53_record" "route_record" {
+  for_each = { for k, v in var.config_list : k => v}
+
   zone_id = aws_route53_zone.hosted_zone_public.zone_id
-  name    = "${var.record_name}.${var.hosted_zone_name}"
+  name    = "${each.value.record_name}.${each.value.hosted_zone_name}"
   
-  type    = var.record_type
-  ttl     = var.ttl
-  records = var.records_list
+  type    = each.value.record_type
+  ttl     = each.value.ttl
+  records = try(each.value.records_list, null)
+  set_identifier = try(each.value.identifier, null)
+  health_check_id = lookup(each.value, "health_check_id", null)
 
+  dynamic "failover_routing_policy" {
+    for_each = var.routing_policy_type == "failover" ? [true] : []
 
-  # dynamic "alias" {
-  #   for_each = length(keys(lookup(each.value, "alias", {}))) == 0 ? [] : [true]
-
-  #   content {
-  #     name                   = each.value.alias.name
-  #     zone_id                = try(each.value.alias.zone_id, data.aws_route53_zone.this[0].zone_id)
-  #     evaluate_target_health = lookup(each.value.alias, "evaluate_target_health", false)
-  #   }
-  # }
-
-  # dynamic "failover_routing_policy" {
-  #   for_each = length(keys(lookup(each.value, "failover_routing_policy", {}))) == 0 ? [] : [true]
-
-  #   content {
-  #     type = each.value.failover_routing_policy.type
-  #   }
-  # }
-
-  # dynamic "latency_routing_policy" {
-  #   for_each = length(keys(lookup(each.value, "latency_routing_policy", {}))) == 0 ? [] : [true]
-
-  #   content {
-  #     region = each.value.latency_routing_policy.region
-  #   }
-  # }
-
-  # dynamic "weighted_routing_policy" {
-  #   for_each = length(keys(lookup(each.value, "weighted_routing_policy", {}))) == 0 ? [] : [true]
-
-  #   content {
-  #     weight = each.value.weighted_routing_policy.weight
-  #   }
-  # }
-
-  # dynamic "geolocation_routing_policy" {
-  #   for_each = length(keys(lookup(each.value, "geolocation_routing_policy", {}))) == 0 ? [] : [true]
-
-  #   content {
-  #     continent   = lookup(each.value.geolocation_routing_policy, "continent", null)
-  #     country     = lookup(each.value.geolocation_routing_policy, "country", null)
-  #     subdivision = lookup(each.value.geolocation_routing_policy, "subdivision", null)
-  #   }
-  # }
+    content {
+      type = each.value.failover_routing_policy.type
+    }
+  }
 }

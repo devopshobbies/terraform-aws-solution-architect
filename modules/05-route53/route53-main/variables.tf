@@ -1,4 +1,14 @@
 # ---------------------------------------------------------------------------------------------------------------------
+# REQUIRED PARAMETERS
+# You must provide a value for each of these parameters.
+# ---------------------------------------------------------------------------------------------------------------------
+
+variable "config_list" {
+  description = "List of Configs For Route53 Resource"
+  type        = any
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
@@ -39,4 +49,8 @@ variable "ttl" {
   default     = 300
 }
 
-
+variable "routing_policy_type" {
+  description = "The Type of Routing Policy"
+  type        = string
+  default     = ""
+}
