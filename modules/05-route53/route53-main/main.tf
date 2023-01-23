@@ -1,9 +1,3 @@
-# locals {
-#   records = concat(var.records_list, try(jsondecode(var.records_jsonencoded), []))
-
-#   recordsets = { for rs in local.records : try(rs.key, join(" ", compact(["${rs.name} ${rs.type}", try(rs.set_identifier, "")]))) => rs }
-# }
-
 resource "aws_route53_zone" "hosted_zone_public" {
   name = var.hosted_zone_name
 
@@ -27,6 +21,14 @@ resource "aws_route53_record" "route_record" {
 
     content {
       type = each.value.failover_routing_policy.type
+    }
+  }
+
+  dynamic "weighted_routing_policy" {
+    for_each = var.routing_policy_type == "weighted" ? [true] : []
+
+    content {
+      weight = each.value.weighted_routing_policy.weight
     }
   }
 }
