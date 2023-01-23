@@ -1,5 +1,5 @@
 output "ec2-instance-ipv4" {
-  value       = aws_instance.ec2-instance.*.public_ip
+  value       = var.use_elastic_ip ? aws_eip.ec2-eip.*.public_ip : aws_instance.ec2-instance.*.public_ip
   description = "IPV4 of Created EC2-Instance"
 }
 
