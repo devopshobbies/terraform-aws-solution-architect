@@ -1,5 +1,5 @@
 output "ec2-instance-ipv4" {
-  value       = aws_instance.ec2-instance.*.public_ip
+  value       = var.use_elastic_ip ? aws_eip.ec2-eip.*.public_ip : aws_instance.ec2-instance.*.public_ip
   description = "IPV4 of Created EC2-Instance"
 }
 
@@ -20,7 +20,7 @@ output "ec2-instance-dns" {
 
 output "ec2-elastic-address" {
   description = "Elastic IP Address"
-  value       = one(aws_eip.ec2-eip[*].address)
+  value       = [for eip_info in aws_eip.ec2-eip : eip_info.address]
 }
 
 output "ec2-security-group-id" {
